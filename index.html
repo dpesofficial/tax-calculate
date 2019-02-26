@@ -42,6 +42,7 @@ $(document).ready(function(){
             case (x < 400000):
                 console.log("slab 1 -- 1%");
                 $('#tax_month').html( parseInt( (x * 0.01) / 12) );
+                $('#cash_month').html( ($('#sal').val() - parseInt( (x * 0.01) / 12) * 1 ).toLocaleString() );
                 break;
             case (x > 400000 && x < 500000):
                 console.log("slab 2 -- 10%");
@@ -49,6 +50,7 @@ $(document).ready(function(){
                 var z = ( (x - 400000) * 0.1) / 12;
                 console.log( y + z);
                 $('#tax_month').html( y + z >> 0 );
+                $('#cash_month').html( ( $('#sal').val() - (y + z >> 0) ) - $('#cit').val()  );
                 break;
             case (x > 500000 && x < 700000):
                 console.log(x);
@@ -58,6 +60,7 @@ $(document).ready(function(){
                 var a = ( (x - 500000) * 0.2) / 12;
                 console.log( y + z + a);
                 $('#tax_month').html( y + z + a >> 0 );
+                $('#cash_month').html( ($('#sal').val() - (y + z + a >> 0)) - $('#cit').val() );
                 break;
             default:
                 console.log("none");
