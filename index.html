@@ -45,7 +45,7 @@ $(document).ready(function(){
                 break;
             case (x > 400000 && x < 500000):
                 console.log("slab 2 -- 10%");
-                var y = (x * 0.01) / 12;
+                var y = 333;
                 var z = ( (x - 400000) * 0.1) / 12;
                 console.log( y + z);
                 $('#tax_month').html( y + z >> 0 );
@@ -53,8 +53,8 @@ $(document).ready(function(){
             case (x > 500000 && x < 700000):
                 console.log(x);
                 console.log("slab 3 -- 20%");
-                var y = (x * 0.01) / 12;
-                var z = ( 100000 * 0.1) / 12;
+                var y = 333;
+                var z = 833;
                 var a = ( (x - 500000) * 0.2) / 12;
                 console.log( y + z + a);
                 $('#tax_month').html( y + z + a >> 0 );
