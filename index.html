@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<style type="text/css">
+    *{
+        color: #ddd;
+    }
+    span{
+        color: #282828;
+    }
+    input{
+        display: inline-block;
+        height: 30px;
+        font-size: 15px;
+        padding-left: 10px;
+        color: #000;
+    }
+</style>
+<script>
+//Married
+// 400000 - 1%
+// 400000 - 500000 - 10%
+// 500000 - 700000 - 20%
+// 700000 - 2000000 - 30%
+
+$(document).ready(function(){
+    function calc(e){
+        $('#sal_month').html( ($('#sal').val() * 1 ).toLocaleString() );
+        $('#sal_annual').html( ($('#sal').val() * 12).toLocaleString() );
+        $('#taxable_annual').html( ($('#sal').val() * 12).toLocaleString() );
+        var x;
+        if( $('#cit').val() || $('#ins').val() ){
+             x = parseInt( $('#taxable_annual').html().replace(/,/g, ''), 10 );
+             x = x - ($('#cit').val() * 12) - $('#ins').val();
+             $('#taxable_annual').html( x.toLocaleString() );
+        }else{
+             x = parseInt( $('#taxable_annual').html().replace(/,/g, ''), 10 );
+        }
+        switch (true) {
+            case (x < 400000):
+                console.log("slab 1 -- 1%");
+                $('#tax_month').html( parseInt( (x * 0.01) / 12) );
+                break;
+            case (x > 400000 && x < 500000):
+                console.log("slab 2 -- 10%");
+                break;
+            case (x > 500000 && x < 700000):
+                console.log("slab 3 -- 20%");
+                break;
+            case (x > 700000):
+                console.log("slab 4 -- 30%");
+                break;
+            default:
+                console.log("none");
+                break;
+        }
+    }
+
+    $('input').on('change keyup', function(e){
+        calc();   
+    });
+});
+</script>
+</head>
+<body>
+
+<input type="number" id="sal" placeholder=" monthly sal"> <br/><br/>
+<input type="number" id="cit" placeholder="monthly cit"> <br/><br/>
+<input type="number" id="ins" placeholder="annual insurance"> <br/><br/>
+
+<h1>Monthly cash in hand is: <span id="cash_month"></span> </h1>
+
+<h2>Monthly income  is: <span id="sal_month"></span> </h2>
+<h2>Annual income  is: <span id="sal_annual"></span> </h2>
+<h2>Annual Taxable income  is: <span id="taxable_annual"></span> </h2>
+<h2>Tax deducted in the month is: <span id="tax_month"></span> </h2>
+<h2>Cit Deposited in the month is: <span id="cit_month"></span> </h2>
+
+</body>
+</html>
