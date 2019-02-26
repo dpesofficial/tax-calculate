@@ -42,7 +42,7 @@ $(document).ready(function(){
             case (x < 400000):
                 console.log("slab 1 -- 1%");
                 $('#tax_month').html( parseInt( (x * 0.01) / 12) );
-                $('#cash_month').html( ($('#sal').val() - parseInt( (x * 0.01) / 12) * 1 ).toLocaleString() );
+                $('#cash_month').html( ($('#sal').val() - parseInt( (x * 0.01) / 12) - - $('#cit').val()  ) );
                 break;
             case (x > 400000 && x < 500000):
                 console.log("slab 2 -- 10%");
