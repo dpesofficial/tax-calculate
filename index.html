@@ -28,6 +28,7 @@ $(document).ready(function(){
     function calc(e){
         $('#sal_month').html( ($('#sal').val() * 1 ).toLocaleString() );
         $('#sal_annual').html( ($('#sal').val() * 12).toLocaleString() );
+        $('#cit_month').html( ($('#cit').val() * 1).toLocaleString() );
         $('#taxable_annual').html( ($('#sal').val() * 12).toLocaleString() );
         var x;
         if( $('#cit').val() || $('#ins').val() ){
@@ -44,18 +45,26 @@ $(document).ready(function(){
                 break;
             case (x > 400000 && x < 500000):
                 console.log("slab 2 -- 10%");
+                var y = (x * 0.01) / 12;
+                var z = ( (x - 400000) * 0.1) / 12;
+                console.log( y + z);
+                $('#tax_month').html( y + z >> 0 );
                 break;
             case (x > 500000 && x < 700000):
+                console.log(x);
                 console.log("slab 3 -- 20%");
-                break;
-            case (x > 700000):
-                console.log("slab 4 -- 30%");
+                var y = (x * 0.01) / 12;
+                var z = ( 100000 * 0.1) / 12;
+                var a = ( (x - 500000) * 0.2) / 12;
+                console.log( y + z + a);
+                $('#tax_month').html( y + z + a >> 0 );
                 break;
             default:
                 console.log("none");
                 break;
         }
     }
+    calc();
 
     $('input').on('change keyup', function(e){
         calc();   
@@ -65,9 +74,9 @@ $(document).ready(function(){
 </head>
 <body>
 
-<input type="number" id="sal" placeholder=" monthly sal"> <br/><br/>
-<input type="number" id="cit" placeholder="monthly cit"> <br/><br/>
-<input type="number" id="ins" placeholder="annual insurance"> <br/><br/>
+<input type="number" id="sal" placeholder=" monthly sal" value="60000"> <br/><br/>
+<input type="number" id="cit" placeholder="monthly cit" value="17000"> <br/><br/>
+<input type="number" id="ins" placeholder="annual insurance" value="21000"> <br/><br/>
 
 <h1>Monthly cash in hand is: <span id="cash_month"></span> </h1>
 
